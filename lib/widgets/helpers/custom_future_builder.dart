@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news/helpers/strings_helper.dart';
 import 'package:news/widgets/helpers/loading_widget.dart';
 
 class CustomFutureBuilder<T> extends StatelessWidget {
@@ -16,10 +17,10 @@ class CustomFutureBuilder<T> extends StatelessWidget {
     return FutureBuilder<T>(
       future: future,
       builder: (context, snapshot) {
-        // TODO: check states
         if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasError) {
-            return const Center(child: Text('Error'));
+            return Center(
+                child: Text(StringsHelper.formatException(snapshot.error)));
           }
           final data = snapshot.data!;
           return builder(data);

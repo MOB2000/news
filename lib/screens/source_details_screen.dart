@@ -3,13 +3,12 @@ import 'package:news/constants/assets.dart';
 import 'package:news/constants/colors.dart';
 import 'package:news/constants/styles.dart';
 import 'package:news/constants/widgets.dart';
+import 'package:news/models/article.dart';
+import 'package:news/models/source.dart';
+import 'package:news/providers/news_provider.dart';
 import 'package:news/widgets/article_widget.dart';
 import 'package:news/widgets/helpers/custom_future_builder.dart';
 import 'package:provider/provider.dart';
-
-import '../models/article.dart';
-import '../models/source.dart';
-import '../providers/news_provider.dart';
 
 class SourceDetailsScreen extends StatelessWidget {
   final Source source;

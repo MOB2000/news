@@ -9,8 +9,6 @@ void main() {
   runApp(const News());
 }
 
-// TODO: extract strings, styles
-// TODO: check Internet Connection
 class News extends StatelessWidget {
   const News({Key? key}) : super(key: key);
 

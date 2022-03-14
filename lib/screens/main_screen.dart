@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:news/constants/colors.dart';
 import 'package:news/constants/strings.dart';
@@ -19,13 +22,26 @@ class _MainScreenState extends State<MainScreen> {
     const HomeScreen(),
     const SearchScreen(),
   ];
+  late StreamSubscription subscription;
+
+  bool hasInternet = false;
+
+  @override
+  initState() {
+    super.initState();
+
+    subscription = Connectivity().onConnectivityChanged.listen((result) =>
+        setState(() => hasInternet = result != ConnectivityResult.none));
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: _screens[_index],
-      ),
+      body: hasInternet
+          ? SafeArea(
+              child: _screens[_index],
+            )
+          : const Center(child: Text('No Internet')),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _index,
         onTap: (i) => setState(() => _index = i),
@@ -48,5 +64,11 @@ class _MainScreenState extends State<MainScreen> {
         ],
       ),
     );
+  }
+
+  @override
+  dispose() {
+    super.dispose();
+    subscription.cancel();
   }
 }
