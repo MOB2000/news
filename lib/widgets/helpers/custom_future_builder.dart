@@ -22,8 +22,7 @@ class CustomFutureBuilder<T> extends StatelessWidget {
             return Center(
                 child: Text(StringsHelper.formatException(snapshot.error)));
           }
-          final data = snapshot.data!;
-          return builder(data);
+          return builder(snapshot.data!);
         }
 
         return const LoadingWidget();
